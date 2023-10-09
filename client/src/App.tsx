@@ -1,13 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import NavigationBar from './layouts/NavigationAndFooter/NavigationBar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-          Learn React
-      </header>
+
+      <NavigationBar />
     </div>
   );
 }
