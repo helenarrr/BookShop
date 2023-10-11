@@ -16,7 +16,6 @@ function ExploreBooks() {
                     </a>
                 </div>
             </div>
-            <Carousel />
         </div>
     );
 }
