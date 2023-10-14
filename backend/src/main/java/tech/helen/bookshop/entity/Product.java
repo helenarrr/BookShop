@@ -11,7 +11,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "title")
     private String title;
@@ -23,7 +23,7 @@ public class Product {
     private String description;
 
     @Column(name = "copies")
-    private String copies;
+    private int copies;
 
     @Column(name = "copies_available")
     private int copiesAvailable;
@@ -33,5 +33,4 @@ public class Product {
 
     @Column(name = "img")
     private String img;
-
 }
