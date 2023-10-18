@@ -5,7 +5,7 @@ import SearchBookItem from "./SearchBookItem";
 import Pagination from "../../Utils/Pagination";
 import LibraryServices from "../../HomePage/components/LibraryServices";
 
-const SearchBookPage = () => {
+export const SearchBookPage = () => {
 
     const [books, setBooks] = useState<Book[]>([]);
     const [loading, setIsLoading] = useState<boolean>(true);
@@ -14,12 +14,25 @@ const SearchBookPage = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalAmountOfBooks, setTotalAmountOfBooks] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-    const booksPerPage = 2;
+
+    const [search, setSearch] = useState("");
+    const [booksPerPage] = useState(2);
+    const [searchUrl, setSearchUrl] = useState("");
+
+    const [categorySelection, setCategorySelection] = useState("all");
 
     useEffect(() => {
         const fetchBooks = async () => {
             const baseUrl = `${process.env.REACT_APP_API_URL}/products`;
-            const url = `${baseUrl}?page=${currentPage - 1}&size=${booksPerPage}`
+            let url = `${baseUrl}?page=${currentPage - 1}&size=${booksPerPage}`
+
+            if (searchUrl === "") {
+                url = `${baseUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
+            } else {
+                let searchWithPage = searchUrl.replace("<pageNumber>", `${currentPage - 1}`);
+                url = `${baseUrl}${searchWithPage}`
+            }
+
             const response = await fetch(url);
 
             if (!response.ok) {
@@ -56,7 +69,7 @@ const SearchBookPage = () => {
         });
         window.scrollTo(0, 0);
 
-    }, [currentPage]);
+    }, [currentPage, searchUrl]);
 
     if (loading) {
         return (
@@ -70,6 +83,43 @@ const SearchBookPage = () => {
                 <p>{httpError}</p>
             </div>
         )
+    }
+
+    const searchHandleChange = () => {
+        setCurrentPage(1);
+        if (search === "") {
+            setSearchUrl("");
+        } else {
+            setSearchUrl(`/search/findByTitleContaining?title=${search}&page=<pageNumber>&size=${booksPerPage}`)
+        }
+        setCategorySelection("all")
+    }
+
+    const categoryField = (value: string) => {
+        setCurrentPage(1);
+        if (
+            value.toLowerCase() === "category_1" ||
+            value.toLowerCase() === "category_2" ||
+            value.toLowerCase() === "category_3" ||
+            value.toLowerCase() === "category_4"
+        ) {
+            setCategorySelection(value);
+            setSearchUrl(`/search/findByCategory?category=${value}&page=<pageNumber>&size=${booksPerPage}`)
+        } else {
+            setCategorySelection("all");
+            setSearchUrl(`?page=<pageNumber>&size=${booksPerPage}`)
+        }
+    }
+
+    const fullNameCategoryTitle = (shotName: string) => {
+        const comparison = new Map<string, string>();
+        comparison.set("category_1", "Категория 1");
+        comparison.set("category_2", "Категория 2");
+        comparison.set("category_3", "Категория 3");
+        comparison.set("category_4", "Категория 4");
+        comparison.set("all", "Все категории");
+
+        return comparison.get(shotName.toLowerCase());
     }
 
     const indexOfLastBook: number = currentPage * booksPerPage;
@@ -91,10 +141,10 @@ const SearchBookPage = () => {
                                     type="search"
                                     placeholder="Поиск"
                                     aria-labelledby="Search"
-                                    onChange={(e) => { }} />
+                                    onChange={(e) => { setSearch(e.target.value); }} />
                                 <button
                                     className="btn btn-outline-success"
-                                    onClick={(e) => { }}
+                                    onClick={(e) => { searchHandleChange(); }}
                                 >
                                     Найти
                                 </button>
@@ -108,33 +158,33 @@ const SearchBookPage = () => {
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                 >
-                                    Категория
+                                    {fullNameCategoryTitle(categorySelection)}
                                 </button>
                                 <ul
                                     className="dropdown-menu"
                                 >
-                                    <li onClick={(e) => { }}>
-                                        <a className="dropdown-item" href="/">
+                                    <li onClick={(e) => { categoryField("all"); }}>
+                                        <a className="dropdown-item" href="#">
                                             Все
                                         </a>
                                     </li>
-                                    <li onClick={(e) => { }}>
-                                        <a className="dropdown-item" href="/">
+                                    <li onClick={(e) => { categoryField("category_1"); }}>
+                                        <a className="dropdown-item" href="#">
                                             Категория 1
                                         </a>
                                     </li>
-                                    <li onClick={(e) => { }}>
-                                        <a className="dropdown-item" href="/">
+                                    <li onClick={(e) => { categoryField("category_2"); }}>
+                                        <a className="dropdown-item" href="#">
                                             Категория 2
                                         </a>
                                     </li>
-                                    <li onClick={(e) => { }}>
-                                        <a className="dropdown-item" href="/">
+                                    <li onClick={(e) => { categoryField("category_3"); }}>
+                                        <a className="dropdown-item" href="#">
                                             Категория 3
                                         </a>
                                     </li>
-                                    <li onClick={(e) => { }}>
-                                        <a className="dropdown-item" href="/">
+                                    <li onClick={(e) => { categoryField("category_4"); }}>
+                                        <a className="dropdown-item" href="#">
                                             Категория 4
                                         </a>
                                     </li>
