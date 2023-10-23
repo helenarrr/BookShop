@@ -29,4 +29,27 @@ INSERT INTO `product` VALUES
   (11,'Продукт 11','Создатель 11','Описание 11', 2, 3, 'category_4',''),
   (12,'Продукт 12','Создатель 12','Описание 12', 2, 3, 'category_4','');
 
-SELECT * FROM `shop_db`.`product`;
+DROP TABLE IF EXISTS `review`;
+CREATE TABLE IF NOT EXISTS `review` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `user_email` varchar(45) DEFAULT NULL,
+  `date` datetime(6) DEFAULT NULL,
+  `rating` decimal (3,2) DEFAULT NULL,
+  `product_id` BIGINT(20) DEFAULT NULL,
+  `review_text` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB auto_increment=1 default charset=utf8mb3;
+
+INSERT INTO `review` VALUES 
+  (1, 'user_1@ksergei.tech', NOW(), 5, 1, 'Тестовый отзыв 1'),
+  (2, 'user_2@ksergei.tech', NOW(), 1, 1, 'Тестовый отзыв 2'),
+  (3, 'user_3@ksergei.tech', NOW(), 4, 2, 'Тестовый отзыв 3'),
+  (4, 'user_1@ksergei.tech', NOW(), 4, 2, 'Тестовый отзыв 4'),
+  (5, 'user_2@ksergei.tech', NOW(), 3, 3, 'Тестовый отзыв 5');
+ 
+SELECT * FROM `shop_db`.`review`;
+
+SELECT * FROM `shop_db`.`review`
+WHERE `shop_db`.`review`.`product_id` = 1;
+
+
