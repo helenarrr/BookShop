@@ -7,16 +7,16 @@ interface Props {
     productId: number | undefined;
     mobile: boolean;
 }
-function LatestReviews(agr: Props) {
+function LatestReviews(arg: Props) {
     return (
-        <div className={agr.mobile ? "mt-3" : "row mt-5"}>
-            <div className={agr.mobile ? "" : "col-sm-2 col-md-2"}>
+        <div className={arg.mobile ? "mt-3" : "row mt-5"}>
+            <div className={arg.mobile ? "" : "col-sm-2 col-md-2"}>
                 <h2>Последние отзывы: </h2>
             </div>
             <div className="col-sm-10 col-md-10">
-                {agr.reviews.length > 0 ?
+                {arg.reviews.length > 0 ?
                     <>
-                        {agr.reviews.slice(0, 3).map((review, i) => (
+                        {arg.reviews.slice(0, 3).map((review, i) => (
                             <Feedback review={review} />
                         ))}
 
