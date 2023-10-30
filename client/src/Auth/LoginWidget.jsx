@@ -1,34 +1,34 @@
-import { useEffect, useRef } from 'react';
-import OktaSignIn from '@okta/okta-signin-widget';
-// import './../../node_modules/@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
-import '@okta/okta-signin-widget/dist/css/okta-sign-in.min.css';
-import { oktaConfig } from '../config/OktaConfig';
+import { Redirect } from 'react-router-dom';
+import { useOktaAuth } from '@okta/okta-react';
+import OktaSignInWidget from './OktaSignInWidget';
+import SpinnerLoading from '../layouts/Utils/SpinnerLoading'
 
-function OktaSignInWidget({ onSuccess, onError }) {
-    const widgetRef = useRef();
+function LoginWidget({ config }) {
+    const { oktaAuth, authState } = useOktaAuth();
+    const onSuccess = (tokens) => {
+        oktaAuth.handleLoginRedirect(tokens);
+    };
 
-    useEffect(() => {
+    const onError = (err) => {
+        console.log("Ошибка входа: ", err);
+    }
 
-        if (!widgetRef.current) {
-            return false;
-        }
+    if (!authState) {
+        return (
+            <SpinnerLoading />
+        );
+    }
 
-        const widget = new OktaSignIn(oktaConfig);
-
-        widget.showSignInToGetTokens({
-            el: widgetRef.current,
-        }).then(onSuccess).catch(onError);
-
-        return () => widget.remove();
-    }, [onSuccess, onError]);
-
-    return (
-        <div
-            className="container mt-5 mb-5"
-        >
-            <div ref={widgetRef}></div>
-        </div>
-    );
+    return authState.isAuthenticated ?
+        <Redirect
+            to={{ pathname: "/" }}
+        />
+        :
+        <OktaSignInWidget
+            config={config}
+            onSuccess={onSuccess}
+            onError={onError}
+        />;
 };
 
-export default OktaSignInWidget
+export default LoginWidget;
