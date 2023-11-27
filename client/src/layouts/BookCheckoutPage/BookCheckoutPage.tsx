@@ -5,8 +5,11 @@ import StarsReview from "../Utils/StarsReview";
 import CheckoutAndReviewBox from "./components/CheckoutAndReviewBox";
 import Review from "../../models/Review";
 import LatestReviews from "./components/LatestReview";
+import { useOktaAuth } from "@okta/okta-react/";
 
 function BookCheckoutPage() {
+    const { authState } = useOktaAuth();
+
     const [book, setBook] = useState<Book>();
     const [isLoading, setIsLoading] = useState<Boolean>(true);
     const [httpError, setHttpError] = useState<any>(null);
@@ -14,6 +17,12 @@ function BookCheckoutPage() {
     const [reviews, setReviews] = useState<Review[]>([])
     const [totalStars, setTotalStars] = useState<number>(0);
     const [isLoadingReview, setIsLoadingReview] = useState<boolean>(true);
+
+    const [currentCheckoutCount, setCurrentCheckoutCount] = useState<number>(0);
+    const [isLoadingCurrentCheckoutCount, setIsLoadingCurrentCheckoutCount] = useState<boolean>(true);
+
+    const [isCheckedOut, setIsCheckedOut] = useState<boolean>(false);
+    const [isLoadingBookCheckedOut, setIsLoadingBookCheckedOut] = useState<boolean>(true);
 
     const productId = (window.location.pathname).split("/")[2];
 
@@ -47,8 +56,6 @@ function BookCheckoutPage() {
             setHttpError(err.message)
         })
     }, [productId]);
-
-
 
     useEffect(() => {
         const fetchBookReviews = async () => {
@@ -93,12 +100,69 @@ function BookCheckoutPage() {
         });
     }, [productId]);
 
-    if (isLoading || isLoadingReview) {
+    useEffect(() => {
+        const fetchUserCurrentLoansCount = async () => {
+            if (authState && authState.isAuthenticated) {
+                const url = `${process.env.REACT_APP_API_URL}/products/secure/currentorder/count`;
+                const requestOptions = {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                        "Content-Type": "application/json"
+                    }
+                };
+                const currentLoansCountResponse = await fetch(url, requestOptions);
+                if (!currentLoansCountResponse.ok) {
+                    throw new Error("Ошибка загрузки!");
+                }
+                const currentLoansCountResponseJson = await currentLoansCountResponse.json();
+                setCurrentCheckoutCount(currentLoansCountResponseJson);
+            }
+            setIsLoadingCurrentCheckoutCount(false);
+        }
+        fetchUserCurrentLoansCount().catch((error: any) => {
+            setIsLoadingCurrentCheckoutCount(false);
+            setHttpError(error.message);
+        })
+    }, [authState, isCheckedOut]);
+
+    useEffect(() => {
+        const fetchUserCheckedOutBook = async () => {
+            if (authState && authState.isAuthenticated) {
+                const url = `${process.env.REACT_APP_API_URL}/products/secure/isorder/byuser?productId=${productId}`;
+                const requestOptions = {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                        "Content-Type": "application/json"
+                    }
+                };
+                const bookCheckedOut = await fetch(url, requestOptions);
+
+                if (!bookCheckedOut.ok) {
+                    throw new Error("Ошибка загрузки!");
+                }
+
+                const bookCheckedOutResponseJson = await bookCheckedOut.json();
+                setIsCheckedOut(bookCheckedOutResponseJson);
+            }
+            setIsLoadingBookCheckedOut(false);
+        }
+        fetchUserCheckedOutBook().catch((error: any) => {
+            setIsLoadingBookCheckedOut(false);
+            setHttpError(error.message);
+        })
+    }, [authState]);
+
+    if (isLoading
+        || isLoadingReview
+        || isLoadingCurrentCheckoutCount
+        || isLoadingBookCheckedOut
+    ) {
         return (
             <SpinnerLoading />
         );
     }
-
 
     if (httpError) {
         return (
@@ -106,6 +170,22 @@ function BookCheckoutPage() {
                 <p>{httpError}</p>
             </div>
         )
+    }
+
+    async function checkoutBook() {
+        const url = `${process.env.REACT_APP_API_URL}/products/secure/order?productId=${productId}`;
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        };
+        const checkoutResponse = await fetch(url, requestOptions);
+        if (!checkoutResponse.ok) {
+            throw new Error('Ошибка');
+        }
+        setIsCheckedOut(true);
     }
 
     return (
@@ -140,6 +220,10 @@ function BookCheckoutPage() {
                     <CheckoutAndReviewBox
                         book={book}
                         mobile={false}
+                        currentCheckoutCount={currentCheckoutCount}
+                        isAuthenticated={authState?.isAuthenticated}
+                        isCheckedOut={isCheckedOut}
+                        checkoutBook={checkoutBook}
                     />
                 </div>
                 <hr />
@@ -180,6 +264,10 @@ function BookCheckoutPage() {
                 <CheckoutAndReviewBox
                     book={book}
                     mobile={true}
+                    currentCheckoutCount={currentCheckoutCount}
+                    isAuthenticated={authState?.isAuthenticated}
+                    isCheckedOut={isCheckedOut}
+                    checkoutBook={checkoutBook}
                 />
                 <hr />
                 <LatestReviews
