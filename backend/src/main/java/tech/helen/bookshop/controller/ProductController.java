@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import tech.helen.bookshop.config.Environment;
 import tech.helen.bookshop.entity.Product;
 import tech.helen.bookshop.service.ProductService;
 import tech.helen.bookshop.utils.JWTParser;
 
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(Environment.host)
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {

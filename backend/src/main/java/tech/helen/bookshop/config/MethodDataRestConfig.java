@@ -12,7 +12,7 @@ import tech.helen.bookshop.entity.Review;
 @Configuration
 public class MethodDataRestConfig implements RepositoryRestConfigurer {
 
-        private String clientUrl = Environment.getInstance().getHost();
+        private String clientUrl = Environment.host;
 
         @Override
         public void configureRepositoryRestConfiguration(
