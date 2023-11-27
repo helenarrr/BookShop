@@ -331,6 +331,147 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "first secure request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/api/products/secure/isorder/byuser?productId=1",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"secure",
+						"isorder",
+						"byuser"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "secure isorder byuser?productId",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/api/products/secure/isorder/byuser?productId=1",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"secure",
+						"isorder",
+						"byuser"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "secure currentorder count",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/api/products/secure/currentorder/count",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"secure",
+						"currentorder",
+						"count"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "secure order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/api/products/secure/order?productId=2",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"secure",
+						"order"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -357,6 +498,11 @@
 		{
 			"key": "HOST",
 			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "TOKEN",
+			"value": "eyJraWQiOiI3UjhvQXhjQ0k0aUVIQW9rWTZ3QlVNamhLb2tLaGJKTE5LRXl0MHdxZFMwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULmM4cG8wQmRLMnNQbjh0SnpCNlhSQ0hlS0t0b1dtRkNQZWVGaER4ZzhORFEiLCJpc3MiOiJodHRwczovL2Rldi0xNDgxMDAwMi5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2OTM3NDMxNzIsImV4cCI6MTY5Mzc0Njc3MiwiY2lkIjoiMG9hYjM1M2Y0a2pRdk5nUlM1ZDciLCJ1aWQiOiIwMHU5dWNtdmY4QnhTN0tuNDVkNyIsInNjcCI6WyJlbWFpbCIsIm9wZW5pZCIsInByb2ZpbGUiXSwiYXV0aF90aW1lIjoxNjkzNzQzMTcwLCJzdWIiOiJxQHcucnQifQ.X9qZF0lchEnoWkJ9jbh8yXIk2tUNSBxdEy3SFPohwkyZNAXRA5UgtNYEYu1LH7sxyhDli1tuhXPF4vUru6rucSadWGlkaf9j2iD4XM3bPhvBMWsMCeTuLHkpvRJUPYNc8H-YMuzwqSgHdhD4Vp2T4Lpdowuk3hqRoF8SQhPzvSvZIELMHW_sDbbkL-3MJFXEV8KMuT4NkacInxwS1svBPOdPF2K-vLe4WE_9PpeBr8s_KDrx3DHpPifC8IEByWczIMM67TtBYmc8uhpsLrZKsesX3D8Jkb5r8Wiu0hh1t51DEkTPSAg2QF7mPn7SmmeSJRqq2UWroT2vWfLIiRBCEQ",
 			"type": "string"
 		}
 	]
