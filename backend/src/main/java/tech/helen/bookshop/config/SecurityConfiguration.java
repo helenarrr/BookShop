@@ -2,7 +2,6 @@ package tech.helen.bookshop.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.accept.ContentNegotiationStrategy;
@@ -16,17 +15,17 @@ public class SecurityConfiguration {
         @Bean
         public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-                http.csrf(csrf -> csrf.disable());
+                http.csrf().disable();
 
-                http.authorizeHttpRequests(configurer -> configurer
-                                .requestMatchers(
+                http.authorizeRequests(configurer -> configurer
+                                .antMatchers(
                                                 "/api/products/secure/**",
                                                 "/api/reviews/secure/**")
                                 .authenticated())
-                                .oauth2ResourceServer(server -> server
-                                                .jwt(Customizer.withDefaults()));
+                                .oauth2ResourceServer()
+                                .jwt();
 
-                http.cors(Customizer.withDefaults());
+                http.cors();
 
                 http.setSharedObject(ContentNegotiationStrategy.class,
                                 new HeaderContentNegotiationStrategy());
