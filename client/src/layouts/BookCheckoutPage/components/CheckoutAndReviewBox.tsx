@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Book from "../../../models/Book";
+import StarReview from "../../Utils/StarReview";
 
 interface Props {
     book: Book | undefined;
@@ -8,7 +9,10 @@ interface Props {
     isCheckedOut: boolean;
     isAuthenticated: any;
     checkoutBook: any;
+    isReviewLeft: boolean;
+    submitReview: any;
 }
+
 function CheckoutAndReviewBox(arg: Props) {
     function buttonRender() {
         if (arg.isAuthenticated) {
@@ -28,6 +32,26 @@ function CheckoutAndReviewBox(arg: Props) {
             }
         }
         return (<Link to={"/login"} className="btn btn-success btn-lg">Войти</Link>)
+    }
+
+    function reviewRender() {
+        if (arg.isAuthenticated && !arg.isReviewLeft) {
+            return (
+                <StarReview
+                    submitReview={arg.submitReview}
+                />
+            )
+        } else if (arg.isAuthenticated && arg.isReviewLeft) {
+            return (
+                <p>Спасибо за ваш отзыв</p>
+            )
+        }
+        return (
+            <div>
+                <hr />
+                <p>Войдите, чтобы оставить отзыв</p>
+            </div>
+        )
     }
 
     return (
@@ -58,11 +82,7 @@ function CheckoutAndReviewBox(arg: Props) {
                 <p className="mt-3">
                     Значение может меняться пока не будет сделан заказ
                 </p>
-                <Link
-                    className="btn btn-success btn-lg"
-                    to={""}>
-                    Написать отзыв
-                </Link>
+                {reviewRender()}
             </div>
         </div >
     );
