@@ -1,5 +1,7 @@
 package tech.helen.bookshop.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tech.helen.bookshop.config.Environment;
 import tech.helen.bookshop.entity.Product;
+import tech.helen.bookshop.responsemodels.ShelfProductResponseModel;
 import tech.helen.bookshop.service.ProductService;
 import tech.helen.bookshop.utils.JWTParser;
 
@@ -52,5 +55,20 @@ public class ProductController {
       @RequestHeader(value = "Authorization") String token) {
     String userEmail = extractEmail(token, "\"sub\"");
     return productService.currentCustomOrderCount(userEmail);
+  }
+
+  @GetMapping("/secure/shelfproducts")
+  public List<ShelfProductResponseModel> currentItemShelf(
+      @RequestHeader(value = "Authorization") String token)
+      throws Exception {
+    String userEmail = extractEmail(token, "\"sub\"");
+    return productService.currentProductsOnShelf(userEmail);
+  }
+
+  @GetMapping("/secure/shelfproducts/count")
+  public int currentItemShelfCount(
+      @RequestHeader(value = "Authorization") String token) {
+    String userEmail = extractEmail(token, "\"sub\"");
+    return productService.currentCountProductOnShelf(userEmail);
   }
 }
