@@ -71,4 +71,20 @@ public class ProductController {
     String userEmail = extractEmail(token, "\"sub\"");
     return productService.currentCountProductsOnShelf(userEmail);
   }
+
+  @PutMapping("/secure/return")
+  public void returnProduct(
+      @RequestHeader(value = "Authorization") String token,
+      @RequestParam Long productId) throws Exception {
+    String userEmail = extractEmail(token, "\"sub\"");
+    productService.returnProduct(userEmail, productId);
+  }
+
+  @PutMapping("/secure/renew")
+  public void renewProduct(
+      @RequestHeader(value = "Authorization") String token,
+      @RequestParam Long productId) throws Exception {
+    String userEmail = extractEmail(token, "\"sub\"");
+    productService.renewProduct(userEmail, productId);
+  }
 }
