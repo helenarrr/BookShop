@@ -100,4 +100,42 @@ public class ProductService {
     public int currentCountProductsOnShelf(String userEmail) {
         return orderRepository.findProductByUserEmail(userEmail).size();
     }
+
+    public void returnProduct(String userEmail, Long productId) throws Exception {
+
+        Optional<Product> product = productRepository.findById(productId);
+
+        CustomOrder validateCheckout = orderRepository.findByUserEmailAndProductId(
+                userEmail,
+                productId);
+
+        if (!product.isPresent() || validateCheckout == null) {
+            throw new Exception("Операция невозможна");
+        }
+
+        product.get().setCopiesAvailable(product.get().getCopiesAvailable() + 1);
+
+        productRepository.save(product.get());
+        orderRepository.deleteById(validateCheckout.getId());
+    }
+
+    public void renewProduct(String userEmail, Long productId) throws Exception {
+
+        CustomOrder validate = orderRepository.findByUserEmailAndProductId(
+                userEmail,
+                productId);
+
+        if (validate == null) {
+            throw new Exception("Операция невозможна");
+        }
+
+        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+
+        Date d1 = date.parse(validate.getReturnDate());
+        Date d2 = date.parse(LocalDate.now().toString());
+        if (d1.compareTo(d2) > 0 || d1.compareTo(d2) == 0) {
+            validate.setReturnDate(LocalDate.now().plusDays(3).toString());
+            orderRepository.save(validate);
+        }
+    }
 }
