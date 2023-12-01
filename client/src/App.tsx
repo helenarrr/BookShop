@@ -10,6 +10,7 @@ import Footer from './layouts/NavigationAndFooter/Footer';
 import SearchBookPage from './layouts/SearchBookPage/components/SearchBookPage';
 import BookCheckoutPage from './layouts/BookCheckoutPage/BookCheckoutPage';
 import './App.css';
+import ReviewListPage from './layouts/ReviewListPage/ReviewListPage';
 
 const oktaAuth = new OktaAuth(oktaConfig);
 
@@ -49,7 +50,9 @@ function App() {
             <Route path="/checkout/:bookId">
               <BookCheckoutPage />
             </Route>
-
+            <Route path="/reviewlist/:bookId">
+              <ReviewListPage />
+            </Route>
             <Route path='/login' render={
               () => <LoginWidget config={oktaConfig} />
             }
