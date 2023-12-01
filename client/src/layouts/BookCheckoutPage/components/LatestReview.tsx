@@ -24,7 +24,7 @@ function LatestReviews(arg: Props) {
                             <Link
                                 type="button"
                                 className="btn main-color btn-md text-white"
-                                to={`/`}>
+                                to={`/reviewlist/${arg.productId}`}>
                                 Все отзывы
                             </Link>
                         </div>
