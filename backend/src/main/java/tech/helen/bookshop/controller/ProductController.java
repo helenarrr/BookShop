@@ -47,14 +47,14 @@ public class ProductController {
       @RequestHeader(value = "Authorization") String token,
       @RequestParam Long productId) {
     String userEmail = extractEmail(token, "\"sub\"");
-    return productService.CustomOrderProductByUser(userEmail, productId);
+    return productService.orderProductByUser(userEmail, productId);
   }
 
   @GetMapping("/secure/currentorder/count")
   public int currentCustomOrderCount(
       @RequestHeader(value = "Authorization") String token) {
     String userEmail = extractEmail(token, "\"sub\"");
-    return productService.currentCustomOrderCount(userEmail);
+    return productService.currentOrderCount(userEmail);
   }
 
   @GetMapping("/secure/shelfproducts")
@@ -69,6 +69,6 @@ public class ProductController {
   public int currentItemShelfCount(
       @RequestHeader(value = "Authorization") String token) {
     String userEmail = extractEmail(token, "\"sub\"");
-    return productService.currentCountProductOnShelf(userEmail);
+    return productService.currentCountProductsOnShelf(userEmail);
   }
 }

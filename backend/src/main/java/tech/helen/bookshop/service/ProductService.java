@@ -1,41 +1,36 @@
 package tech.helen.bookshop.service;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
+import tech.helen.bookshop.dao.*;
+import tech.helen.bookshop.entity.*;
+import tech.helen.bookshop.responsemodels.ShelfProductResponseModel;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tech.helen.bookshop.dao.CustomOrderRepository;
-import tech.helen.bookshop.dao.ProductRepository;
-import tech.helen.bookshop.entity.CustomOrder;
-import tech.helen.bookshop.entity.Product;
-import tech.helen.bookshop.responsemodels.ShelfProductResponseModel;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Transactional
 public class ProductService {
 
     private ProductRepository productRepository;
-    private CustomOrderRepository customOrderRepository;
+    private CustomOrderRepository orderRepository;
 
     public ProductService(
             ProductRepository productRepository,
-            CustomOrderRepository customOrderRepository) {
+            CustomOrderRepository orderRepository) {
         this.productRepository = productRepository;
-        this.customOrderRepository = customOrderRepository;
+        this.orderRepository = orderRepository;
     }
 
     public Product orderProduct(String userEmail, Long productId)
             throws Exception {
         Optional<Product> product = productRepository.findById(productId);
 
-        CustomOrder validate = customOrderRepository
+        CustomOrder validate = orderRepository
                 .findByUserEmailAndProductId(userEmail, productId);
 
         if (!product.isPresent()
@@ -53,31 +48,31 @@ public class ProductService {
                 LocalDate.now().plusDays(7).toString(),
                 product.get().getId());
 
-        customOrderRepository.save(order);
+        orderRepository.save(order);
 
         return product.get();
     }
 
-    public Boolean CustomOrderProductByUser(String userEmail, Long productId) {
-        CustomOrder validate = customOrderRepository
+    public Boolean orderProductByUser(String userEmail, Long productId) {
+        CustomOrder validate = orderRepository
                 .findByUserEmailAndProductId(userEmail, productId);
         return validate != null;
     }
 
-    public int currentCustomOrderCount(String userEmail) {
-        return customOrderRepository
-                .findProductByUserEmail(userEmail).size();
+    public int currentOrderCount(String userEmail) {
+        return orderRepository.findProductByUserEmail(userEmail).size();
     }
 
-    public List<ShelfProductResponseModel> currentProductsOnShelf(String userEmail) throws Exception {
-
+    public List<ShelfProductResponseModel> currentProductsOnShelf(String userEmail)
+            throws Exception {
         List<ShelfProductResponseModel> shelfResponses = new ArrayList<>();
-        List<CustomOrder> orders = customOrderRepository.findProductByUserEmail(userEmail);
+        List<CustomOrder> orders = orderRepository.findProductByUserEmail(userEmail);
         List<Long> productsId = new ArrayList<>();
 
         for (CustomOrder order : orders) {
             productsId.add(order.getProductId());
         }
+
         List<Product> products = productRepository.findProductByProductIds(productsId);
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -95,17 +90,14 @@ public class ProductService {
                 TimeUnit time = TimeUnit.DAYS;
 
                 long diff = time.convert(d1.getTime() - d2.getTime(), TimeUnit.MILLISECONDS);
-
                 shelfResponses.add(
                         new ShelfProductResponseModel(product, (int) diff));
-
             }
         }
         return shelfResponses;
-
     }
 
-    public int currentCountProductOnShelf(String userEmail) {
-        return customOrderRepository.findProductByUserEmail(userEmail).size();
+    public int currentCountProductsOnShelf(String userEmail) {
+        return orderRepository.findProductByUserEmail(userEmail).size();
     }
 }
