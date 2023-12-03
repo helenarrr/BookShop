@@ -18,12 +18,15 @@ public class ProductService {
 
     private ProductRepository productRepository;
     private CustomOrderRepository orderRepository;
+    private HistoryRepository historyRepository;
 
     public ProductService(
             ProductRepository productRepository,
-            CustomOrderRepository orderRepository) {
+            CustomOrderRepository orderRepository,
+            HistoryRepository historyRepository) {
         this.productRepository = productRepository;
         this.orderRepository = orderRepository;
+        this.historyRepository = historyRepository;
     }
 
     public Product orderProduct(String userEmail, Long productId)
@@ -117,6 +120,17 @@ public class ProductService {
 
         productRepository.save(product.get());
         orderRepository.deleteById(validateCheckout.getId());
+
+        History history = new History(
+                userEmail,
+                validateCheckout.getOrderDate(),
+                LocalDate.now().toString(),
+                product.get().getTitle(),
+                product.get().getCreator(),
+                product.get().getDescription(),
+                product.get().getImg());
+
+        historyRepository.save(history);
     }
 
     public void renewProduct(String userEmail, Long productId) throws Exception {
