@@ -82,3 +82,16 @@ WHERE `shop_db`.`product_order`.user_email='user_1@ksergei.tech'
 
 DELETE FROM `shop_db`.`product_order` 
 WHERE `shop_db`.`product_order`.id > 0;
+
+DROP TABLE IF EXISTS `history`;
+CREATE TABLE IF NOT EXISTS `history` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `user_email` varchar(45) DEFAULT NULL,
+  `order_date` varchar(45) DEFAULT NULL,
+  `returned_date` varchar(45) DEFAULT NULL,
+  `title` varchar(45) DEFAULT NULL,
+  `creator` varchar(45) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `img` MEDIUMBLOB  DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB auto_increment=1 default charset=utf8mb3;
