@@ -636,6 +636,156 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "products secure return",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": 4,\n    \"productId\": 11,\n    \"reviewDescription\": \"Мой отзыв из postman\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/products/secure/return?productId=1",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"secure",
+						"return"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "products secure renew",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": 4,\n    \"productId\": 11,\n    \"reviewDescription\": \"Мой отзыв из postman\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/products/secure/renew?productId=2",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"secure",
+						"renew"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "histories findProductByUserEmail",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"rating\": 4,\n    \"productId\": 11,\n    \"reviewDescription\": \"Мой отзыв из postman\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/histories/search/findProductByUserEmail/?email=ad@min.ru&page=0&size=5",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"histories",
+						"search",
+						"findProductByUserEmail",
+						""
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "ad@min.ru"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -666,7 +816,7 @@
 		},
 		{
 			"key": "TOKEN",
-			"value": "eyJraWQiOiI3UjhvQXhjQ0k0aUVIQW9rWTZ3QlVNamhLb2tLaGJKTE5LRXl0MHdxZFMwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjRrY2dQYTFVQ1dCYXZsSjJHMTVKVWFJcFhiWkpmNzllZ3hsVWhycVZzTkEiLCJpc3MiOiJodHRwczovL2Rldi0xNDgxMDAwMi5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2OTM3NjgyODcsImV4cCI6MTY5Mzc3MTg4NywiY2lkIjoiMG9hYjM1M2Y0a2pRdk5nUlM1ZDciLCJ1aWQiOiIwMHU5dG9pcDJ2c1FkM25wczVkNyIsInNjcCI6WyJwcm9maWxlIiwib3BlbmlkIiwiZW1haWwiXSwiYXV0aF90aW1lIjoxNjkzNzY4Mjg1LCJzdWIiOiJhZEBtaW4ucnUifQ.iVgmMtfMiI4-24Wi4zNkqqnUwK-Iib5NDN7kqGU53UpSRA-X0qvY--xjfleGrgl_v17Acs8-5d8KMf4f5oNlNlx_LRSx29CscZ_Kvdeav1Fou-a5qfeaX_nERjZMv_WQ0bFjQD5UCSKhRrgmxBl-PtbPe-0TpWYed8EzOAnmpWFSl2BqWYgbZGxaa8qpIDjmBJYEreoT84omRTVeoJsfHD2egeD5vOH_7w6kIhOY0nC45raojLuigbHM3hX9sfHVUBvSmJs890ASbV5-lCEFvyheuyefeNxxRc9gyefS0UJOxi0pQDYEOCheYf2xUpYVxA5PTw0lf7ePXC1_WhXrEw",
+			"value": "eyJraWQiOiI3UjhvQXhjQ0k0aUVIQW9rWTZ3QlVNamhLb2tLaGJKTE5LRXl0MHdxZFMwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULkZfUzdqSTZVNDJUMWdJeUlYQ1VocWVDXzJoWEdYclFHNE5JZFQxQ3RPVzAiLCJpc3MiOiJodHRwczovL2Rldi0xNDgxMDAwMi5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2OTM4NDg2OTMsImV4cCI6MTY5Mzg1MjI5MywiY2lkIjoiMG9hYjM1M2Y0a2pRdk5nUlM1ZDciLCJ1aWQiOiIwMHU5dG9pcDJ2c1FkM25wczVkNyIsInNjcCI6WyJwcm9maWxlIiwib3BlbmlkIiwiZW1haWwiXSwiYXV0aF90aW1lIjoxNjkzODQ4NjkxLCJzdWIiOiJhZEBtaW4ucnUifQ.vDrAK2IlXZOYR5AGkXOurbr1NvLOSqmwJBIQYiyAMuVb-KPsROddlZH2rEdjTARUdbPg6LwkjTNb0OUIWlw0PKnHRKLvhIWX8cM3CxYVvlE-UrYTPXcAmIHdKavDT5vYnqzBgSJ4XBd0QxmEA-LNiLhsmbFEatyRVLl3U-HBaOmU30OMkh6VrHgDwYyAWGhmdS9apEWjgGMwZVar0wfgk9zd00E2_mRitmwvs99ogiDrqIno80YTHQQ-UjlHkz8aIf2ufPX-Qt0WBhVZnCuOKdKjDw-e_5G6Det_e0tw_BkbI6h0vihtxQk0QCFly5Q5vvNFILcfCAfQ8ociiArmMA",
 			"type": "string"
 		}
 	]
