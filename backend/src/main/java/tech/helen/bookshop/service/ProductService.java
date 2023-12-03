@@ -74,7 +74,7 @@ public class ProductService {
         }
 
         List<Product> products = productRepository.findProductByProductIds(productsId);
-        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 
         for (Product product : products) {
             Optional<CustomOrder> order = orders
@@ -85,7 +85,7 @@ public class ProductService {
             if (order.isPresent()) {
 
                 Date d1 = date.parse(order.get().getReturnDate());
-                Date d2 = date.parse(LocalDate.now().toString());
+                Date d2 = date.parse(order.get().getOrderDate());
 
                 TimeUnit time = TimeUnit.DAYS;
 
@@ -129,7 +129,7 @@ public class ProductService {
             throw new Exception("Операция невозможна");
         }
 
-        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 
         Date d1 = date.parse(validate.getReturnDate());
         Date d2 = date.parse(LocalDate.now().toString());

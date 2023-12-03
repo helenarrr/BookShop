@@ -58,7 +58,7 @@ function ShelfManagement() {
     }
 
     async function returnProduct(productId: number) {
-        const url = ``;
+        const url = `${process.env.REACT_APP_API_URL}/products/secure/return/?productId=${productId}`;
         const requestOptions = {
             method: "PUT",
             headers: {
@@ -74,7 +74,7 @@ function ShelfManagement() {
     }
 
     async function renewProduct(productId: number) {
-        const url = ``;
+        const url = `${process.env.REACT_APP_API_URL}/products/secure/renew/?productId=${productId}`;
         const requestOptions = {
             method: "PUT",
             headers: {
