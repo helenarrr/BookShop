@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ShelfManagement from "./components/ShelfManagement";
+import HistoryPage from "./components/HistoryPage";
 
 function ShelfPage() {
 
@@ -59,6 +60,7 @@ function ShelfPage() {
                         role="tabpanel"
                         aria-labelledby="nav-history-tab"
                     >
+                        <HistoryPage />
                         История добавления
                     </div>
                 </div>
