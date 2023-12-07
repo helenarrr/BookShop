@@ -1,5 +1,6 @@
 import { useOktaAuth } from "@okta/okta-react/";
 import { Redirect } from "react-router-dom";
+import AdminMessages from "./components/AdminMessages";
 
 function ManageLibraryPage() {
     const { authState } = useOktaAuth();
@@ -84,7 +85,7 @@ function ManageLibraryPage() {
                         role="tabpanel"
                         aria-labelledby="nav-messages-tab"
                     >
-                        Компонент для сообщений
+                        <AdminMessages />
                     </div>
                 </div>
             </div>
