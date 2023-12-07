@@ -14,7 +14,7 @@ function NavigationBar() {
         oktaAuth.closeSession();
     }
 
-    //   console.log(">> " + authState.accessToken?.accessToken + " <<");
+    console.log(">> " + authState.accessToken?.accessToken + " <<");
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark main-color py-3">
@@ -50,6 +50,17 @@ function NavigationBar() {
                                 <li className="nav-item">
                                     <NavLink className="nav-link" to="/shelf">
                                         Полка
+                                    </NavLink>
+                                </li>
+                            }
+
+                        </li>
+                        <li>
+                            {
+                                authState.isAuthenticated &&
+                                <li className="nav-item">
+                                    <NavLink className="nav-link" to="/messages">
+                                        Техническая поддержка
                                     </NavLink>
                                 </li>
                             }
