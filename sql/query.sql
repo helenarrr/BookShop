@@ -16,20 +16,20 @@ CREATE TABLE `product` (
 ) engine=InnoDB auto_increment=1 default charset=utf8mb3;
 
 INSERT INTO `product` VALUES 
-  (1,'Продукт 1','Создатель 1','Описание 1', 5, 2, 'category_1',''),
-  (2,'Продукт 2','Создатель 2','Описание 2', 5, 1, 'category_2',''),
-  (3,'Продукт 3','Создатель 3','Описание 3', 3, 1, 'category_3',''),
-  (4,'Продукт 4','Создатель 4','Описание 4', 2, 0, 'category_4',''),
+  (1,'Продукт 1','Создатель 1','Описание 1', 5, 5, 'category_1',''),
+  (2,'Продукт 2','Создатель 2','Описание 2', 4, 5, 'category_2',''),
+  (3,'Продукт 3','Создатель 3','Описание 3', 3, 4, 'category_3',''),
+  (4,'Продукт 4','Создатель 4','Описание 4', 2, 3, 'category_4',''),
 
-  (5,'Продукт 5','Создатель 5','Описание 5', 2, 0, 'category_4',''),
-  (6,'Продукт 6','Создатель 6','Описание 6', 2, 1, 'category_4',''),
-  (7,'Продукт 7','Создатель 7','Описание 7', 2, 2, 'category_4',''),
-  (8,'Продукт 8','Создатель 8','Описание 8', 2, 2, 'category_4',''),
+  (5,'Продукт 5','Создатель 5','Описание 5', 2, 3, 'category_4',''),
+  (6,'Продукт 6','Создатель 6','Описание 6', 2, 3, 'category_4',''),
+  (7,'Продукт 7','Создатель 7','Описание 7', 2, 3, 'category_4',''),
+  (8,'Продукт 8','Создатель 8','Описание 8', 2, 3, 'category_4',''),
   
-  (9,'Продукт 9','Создатель 9','Описание 9', 2, 1, 'category_4',''),
-  (10,'Продукт 10','Создатель 10','Описание 10', 5, 1, 'category_4',''),
-  (11,'Продукт 11','Создатель 11','Описание 11', 2, 2, 'category_4',''),
-  (12,'Продукт 12','Создатель 12','Описание 12', 5, 5, 'category_4','');
+  (9,'Продукт 9','Создатель 9','Описание 9', 2, 3, 'category_4',''),
+  (10,'Продукт 10','Создатель 10','Описание 10', 2, 3, 'category_4',''),
+  (11,'Продукт 11','Создатель 11','Описание 11', 2, 3, 'category_4',''),
+  (12,'Продукт 12','Создатель 12','Описание 12', 2, 3, 'category_4','');
 
 SELECT * FROM `shop_db`.`product`;
 
@@ -47,13 +47,24 @@ CREATE TABLE IF NOT EXISTS `review` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB auto_increment=1 default charset=utf8mb3;
 
--- INSERT INTO `review` VALUES 
---   (1, 'user_1@ksergei.tech', NOW(), 5, 1, 'Тестовый отзыв 1'),
---   (2, 'user_2@ksergei.tech', NOW(), 1, 1, 'Тестовый отзыв 2'),
---   (3, 'user_3@ksergei.tech', NOW(), 4, 2, 'Тестовый отзыв 3'),
---   (4, 'user_1@ksergei.tech', NOW(), 4, 2, 'Тестовый отзыв 4'),
---   (5, 'user_2@ksergei.tech', NOW(), 3, 3, 'Тестовый отзыв 5');
- 
+INSERT INTO `review` VALUES 
+  (1, 'user_1@ksergei.tech', NOW(), 5, 1, 'Тестовый отзыв 1'),
+  (2, 'user_2@ksergei.tech', NOW(), 1, 1, 'Тестовый отзыв 2'),
+  (3, 'user_3@ksergei.tech', NOW(), 4, 2, 'Тестовый отзыв 3'),
+  (4, 'user_1@ksergei.tech', NOW(), 4, 2, 'Тестовый отзыв 4'),
+  (5, 'user_2@ksergei.tech', NOW(), 3, 3, 'Тестовый отзыв 5');
+
+INSERT INTO `shop_db`.`review`
+  (`user_email`, `date`, `rating`, `product_id`, `review_text`) 
+VALUES 
+  ('user1@ksergei.tech', NOW(), '1', '7', 'Текст 1'),
+  ('user2@ksergei.tech', NOW(), '2', '7', 'Текст 2'),
+  ('user3@ksergei.tech', NOW(), '3', '7', 'Текст 3'),
+  ('user4@ksergei.tech', NOW(), '4', '7', 'Текст 4'),
+  ('user5@ksergei.tech', NOW(), '4', '7', 'Текст 5'),
+  ('user6@ksergei.tech', NOW(), '5', '7', 'Текст 6'),
+  ('user7@ksergei.tech', NOW(), '5', '7', 'Текст 7');
+
 SELECT * FROM `shop_db`.`review`;
 
 SELECT * FROM `shop_db`.`review`
@@ -83,6 +94,9 @@ WHERE `shop_db`.`product_order`.user_email='user_1@ksergei.tech'
 DELETE FROM `shop_db`.`product_order` 
 WHERE `shop_db`.`product_order`.id > 0;
 
+SELECT * FROM `shop_db`.`product` 
+WHERE `shop_db`.`product`.`id` in (1,2,3);
+
 DROP TABLE IF EXISTS `history`;
 CREATE TABLE IF NOT EXISTS `history` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
@@ -95,3 +109,18 @@ CREATE TABLE IF NOT EXISTS `history` (
   `img` MEDIUMBLOB  DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB auto_increment=1 default charset=utf8mb3;
+
+
+DROP TABLE IF EXISTS `shop_db`.`messages`;
+CREATE TABLE IF NOT EXISTS `shop_db`.`messages` (
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `user_email` varchar(45) DEFAULT NULL,
+  `title` varchar(45) DEFAULT NULL,
+  `user_text` text DEFAULT NULL,
+  `admin_email` varchar(45) DEFAULT NULL,
+  `admin_text` text DEFAULT NULL,
+  `closed` tinyint(1) DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB auto_increment=1 default charset=utf8mb3;
+
+SELECT * FROM `shop_db`.`messages`;
