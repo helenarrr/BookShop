@@ -6,6 +6,13 @@ import java.util.Map;
 
 public class JWTParser {
 
+    public static String extractEmail(String token) {
+        String email = jwtExtraction(token, "\"sub\"");
+        if (email != null)
+            return email;
+        return "";
+    }
+
     public static String jwtExtraction(String token, String tag) {
 
         token.replace("Bearer ", "");

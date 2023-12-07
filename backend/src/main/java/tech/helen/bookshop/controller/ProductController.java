@@ -27,18 +27,11 @@ public class ProductController {
     this.productService = productService;
   }
 
-  private String extractEmail(String token, String string) {
-    String email = JWTParser.jwtExtraction(token, "\"sub\"");
-    if (email != null)
-      return email;
-    return "";
-  }
-
   @PutMapping("/secure/order")
   public Product orderProduct(
       @RequestHeader(value = "Authorization") String token,
       @RequestParam Long productId) throws Exception {
-    String userEmail = extractEmail(token, "\"sub\"");
+    String userEmail = JWTParser.extractEmail(token);
     return productService.orderProduct(userEmail, productId);
   }
 
@@ -46,14 +39,14 @@ public class ProductController {
   public Boolean CustomOrderProductByUser(
       @RequestHeader(value = "Authorization") String token,
       @RequestParam Long productId) {
-    String userEmail = extractEmail(token, "\"sub\"");
+    String userEmail = JWTParser.extractEmail(token);
     return productService.orderProductByUser(userEmail, productId);
   }
 
   @GetMapping("/secure/currentorder/count")
   public int currentCustomOrderCount(
       @RequestHeader(value = "Authorization") String token) {
-    String userEmail = extractEmail(token, "\"sub\"");
+    String userEmail = JWTParser.extractEmail(token);
     return productService.currentOrderCount(userEmail);
   }
 
@@ -61,14 +54,14 @@ public class ProductController {
   public List<ShelfProductResponseModel> currentItemShelf(
       @RequestHeader(value = "Authorization") String token)
       throws Exception {
-    String userEmail = extractEmail(token, "\"sub\"");
+    String userEmail = JWTParser.extractEmail(token);
     return productService.currentProductsOnShelf(userEmail);
   }
 
   @GetMapping("/secure/shelfproducts/count")
   public int currentItemShelfCount(
       @RequestHeader(value = "Authorization") String token) {
-    String userEmail = extractEmail(token, "\"sub\"");
+    String userEmail = JWTParser.extractEmail(token);
     return productService.currentCountProductsOnShelf(userEmail);
   }
 
@@ -76,7 +69,7 @@ public class ProductController {
   public void returnProduct(
       @RequestHeader(value = "Authorization") String token,
       @RequestParam Long productId) throws Exception {
-    String userEmail = extractEmail(token, "\"sub\"");
+    String userEmail = JWTParser.extractEmail(token);
     productService.returnProduct(userEmail, productId);
   }
 
@@ -84,7 +77,7 @@ public class ProductController {
   public void renewProduct(
       @RequestHeader(value = "Authorization") String token,
       @RequestParam Long productId) throws Exception {
-    String userEmail = extractEmail(token, "\"sub\"");
+    String userEmail = JWTParser.extractEmail(token);
     productService.renewProduct(userEmail, productId);
   }
 }
