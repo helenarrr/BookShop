@@ -53,7 +53,6 @@ function NavigationBar() {
                                     </NavLink>
                                 </li>
                             }
-
                         </li>
                         <li>
                             {
@@ -63,6 +62,13 @@ function NavigationBar() {
                                         Техническая поддержка
                                     </NavLink>
                                 </li>
+                            }
+                        </li>
+                        <li>
+                            {authState?.accessToken?.claims.role === "admin" &&
+                                <NavLink className="nav-link" to="/admin">
+                                    Админка
+                                </NavLink>
                             }
                         </li>
                     </ul>
