@@ -6,6 +6,7 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
+import tech.helen.bookshop.entity.Message;
 import tech.helen.bookshop.entity.Product;
 import tech.helen.bookshop.entity.Review;
 
@@ -27,9 +28,11 @@ public class MethodDataRestConfig implements RepositoryRestConfigurer {
 
                 config.exposeIdsFor(Product.class);
                 config.exposeIdsFor(Review.class);
+                config.exposeIdsFor(Message.class);
 
                 disableHttpMethods(Product.class, config, unsupportedActions);
                 disableHttpMethods(Review.class, config, unsupportedActions);
+                disableHttpMethods(Message.class, config, unsupportedActions);
 
                 cors.addMapping(config.getBasePath() + "/**")
                                 .allowedOrigins(clientUrl);
