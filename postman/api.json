@@ -552,9 +552,6 @@
 		},
 		{
 			"name": "secure shelfproducts",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -574,10 +571,6 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"rating\": 4,\n    \"productId\": 11,\n    \"reviewDescription\": \"Мой отзыв из postman\"\n}"
-				},
 				"url": {
 					"raw": "{{HOST}}/api/products/secure/shelfproducts",
 					"host": [
@@ -595,9 +588,6 @@
 		},
 		{
 			"name": "secure shelfproducts count",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -617,10 +607,6 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"rating\": 4,\n    \"productId\": 11,\n    \"reviewDescription\": \"Мой отзыв из postman\"\n}"
-				},
 				"url": {
 					"raw": "{{HOST}}/api/products/secure/shelfproducts/count",
 					"host": [
@@ -704,10 +690,6 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"rating\": 4,\n    \"productId\": 11,\n    \"reviewDescription\": \"Мой отзыв из postman\"\n}"
-				},
 				"url": {
 					"raw": "{{HOST}}/api/products/secure/renew?productId=2",
 					"host": [
@@ -731,9 +713,6 @@
 		},
 		{
 			"name": "histories findProductByUserEmail",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"auth": {
 					"type": "bearer",
@@ -753,12 +732,8 @@
 						"type": "text"
 					}
 				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"rating\": 4,\n    \"productId\": 11,\n    \"reviewDescription\": \"Мой отзыв из postman\"\n}"
-				},
 				"url": {
-					"raw": "{{HOST}}/api/histories/search/findProductByUserEmail/?email=ad@min.ru&page=0&size=5",
+					"raw": "{{HOST}}/api/histories/search/findProductByUserEmail/?email=ad@min.ru",
 					"host": [
 						"{{HOST}}"
 					],
@@ -776,11 +751,199 @@
 						},
 						{
 							"key": "page",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "5",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "message user send",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Заголовок вопроса 2\",\n    \"userText\": \"Текст вопроса 2 \"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/messages/secure/send/message",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"messages",
+						"secure",
+						"send",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "messag findByClosed",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/api/messages/search/findByClosed/?closed=false&page=0&size=5",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"messages",
+						"search",
+						"findByClosed",
+						""
+					],
+					"query": [
+						{
+							"key": "closed",
+							"value": "false"
+						},
+						{
+							"key": "page",
 							"value": "0"
 						},
 						{
 							"key": "size",
 							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "message admin send",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 2,\n    \"text\": \"Ответ от админа 2\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/messages/secure/admin/message",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"messages",
+						"secure",
+						"admin",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "message findByUserEmail",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/api/messages/search/findByUserEmail/?user_email=q@w.rt",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"messages",
+						"search",
+						"findByUserEmail",
+						""
+					],
+					"query": [
+						{
+							"key": "user_email",
+							"value": "q@w.rt"
+						},
+						{
+							"key": "page",
+							"value": "0",
+							"disabled": true
+						},
+						{
+							"key": "size",
+							"value": "1",
+							"disabled": true
 						}
 					]
 				}
@@ -816,7 +979,7 @@
 		},
 		{
 			"key": "TOKEN",
-			"value": "eyJraWQiOiI3UjhvQXhjQ0k0aUVIQW9rWTZ3QlVNamhLb2tLaGJKTE5LRXl0MHdxZFMwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULkZfUzdqSTZVNDJUMWdJeUlYQ1VocWVDXzJoWEdYclFHNE5JZFQxQ3RPVzAiLCJpc3MiOiJodHRwczovL2Rldi0xNDgxMDAwMi5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2OTM4NDg2OTMsImV4cCI6MTY5Mzg1MjI5MywiY2lkIjoiMG9hYjM1M2Y0a2pRdk5nUlM1ZDciLCJ1aWQiOiIwMHU5dG9pcDJ2c1FkM25wczVkNyIsInNjcCI6WyJwcm9maWxlIiwib3BlbmlkIiwiZW1haWwiXSwiYXV0aF90aW1lIjoxNjkzODQ4NjkxLCJzdWIiOiJhZEBtaW4ucnUifQ.vDrAK2IlXZOYR5AGkXOurbr1NvLOSqmwJBIQYiyAMuVb-KPsROddlZH2rEdjTARUdbPg6LwkjTNb0OUIWlw0PKnHRKLvhIWX8cM3CxYVvlE-UrYTPXcAmIHdKavDT5vYnqzBgSJ4XBd0QxmEA-LNiLhsmbFEatyRVLl3U-HBaOmU30OMkh6VrHgDwYyAWGhmdS9apEWjgGMwZVar0wfgk9zd00E2_mRitmwvs99ogiDrqIno80YTHQQ-UjlHkz8aIf2ufPX-Qt0WBhVZnCuOKdKjDw-e_5G6Det_e0tw_BkbI6h0vihtxQk0QCFly5Q5vvNFILcfCAfQ8ociiArmMA",
+			"value": "eyJraWQiOiI3UjhvQXhjQ0k0aUVIQW9rWTZ3QlVNamhLb2tLaGJKTE5LRXl0MHdxZFMwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnY4ejJ5ZGRzT0tOWmxnSWswLTJSM1VKaXFCalFHNGVKSkVES3d1elQ1b2ciLCJpc3MiOiJodHRwczovL2Rldi0xNDgxMDAwMi5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2OTM4NjQ3ODYsImV4cCI6MTY5Mzg2ODM4NiwiY2lkIjoiMG9hYjM1M2Y0a2pRdk5nUlM1ZDciLCJ1aWQiOiIwMHU5dG9pcDJ2c1FkM25wczVkNyIsInNjcCI6WyJvcGVuaWQiLCJlbWFpbCIsInByb2ZpbGUiXSwiYXV0aF90aW1lIjoxNjkzODY0Nzg1LCJzdWIiOiJhZEBtaW4ucnUiLCJyb2xlIjoiYWRtaW4ifQ.BqB8lL-51I2j2iOo9VE81wwYiUChy_TXvY9pD7gFiZm11jlMy2jHNDFhg-JPeGmYi4oexyfJWzdfFONXxzkAR5lRGJH-mBPtvOounxWQ0Y1eKkDU_wq0srVwQr5Qhote_Jx9-aLPOgXiEr1IVXFE4ud8bX6R2Sra-YNRuS8P_0Rz0qqD-4E2xPVhTZF2WN2mxgAhgzoyh58iycnzFL3stReAKPLgRQx-XCs40LwdO13zkxZGEdNba9fRPEgK8udA7qIagpuWBUgH8U8JL-Cw4s3BJ5EdT6X0njEUmzzEujZI308GfiaFES2RljxTJ07mswu67yUFblReb42UtDkd2w",
 			"type": "string"
 		}
 	]
