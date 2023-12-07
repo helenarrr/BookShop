@@ -13,6 +13,13 @@ public class JWTParser {
         return "";
     }
 
+    public static String extractRole(String token) {
+        String userType = jwtExtraction(token, "\"role\"");
+        if (userType != null)
+            return userType;
+        return "";
+    }
+
     public static String jwtExtraction(String token, String tag) {
 
         token.replace("Bearer ", "");
