@@ -68,3 +68,14 @@
   height: 220px;
   width: 150px;
 }
+
+.small-img-admin {
+  height: 265px;
+  width: 170px;
+}
+
+.button-icon-admin {
+  width: 40px;
+  height: 40px;
+  fill: rgba(0, 0, 0, 0.7)
+}
