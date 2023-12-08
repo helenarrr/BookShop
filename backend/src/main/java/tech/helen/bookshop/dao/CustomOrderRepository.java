@@ -15,6 +15,6 @@ public interface CustomOrderRepository extends JpaRepository<CustomOrder, Long> 
     List<CustomOrder> findProductByUserEmail(String userEmail);
 
     @Modifying
-    @Query("delete from Order where product_id in :product_id")
+    @Query("delete from CustomOrder where product_id in :product_id")
     void deleteAllByProductId(@Param("product_id") Long productId);
 }
