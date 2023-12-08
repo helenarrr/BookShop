@@ -1,6 +1,8 @@
 import { useOktaAuth } from "@okta/okta-react/";
 import { Redirect } from "react-router-dom";
 import AdminMessages from "./components/AdminMessages";
+import ChangeCountProducts from "./components/ChangeCountProducts";
+import { AppendNewProduct } from "./components/AppendNewProduct";
 
 function ManageLibraryPage() {
     const { authState } = useOktaAuth();
@@ -69,7 +71,7 @@ function ManageLibraryPage() {
                         role="tabpanel"
                         aria-labelledby="nav-add-product-tab"
                     >
-                        Компонент для добавления
+                        <AppendNewProduct />
                     </div>
                     <div
                         className="tab-pane fade"
@@ -77,7 +79,7 @@ function ManageLibraryPage() {
                         role="tabpanel"
                         aria-labelledby="nav-quantity-tab"
                     >
-                        Компонент для изменения
+                        <ChangeCountProducts />
                     </div>
                     <div
                         className="tab-pane fade"
