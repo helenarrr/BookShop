@@ -879,7 +879,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 2,\n    \"text\": \"Ответ от админа 2\"\n}"
+					"raw": "{\n    \"id\": 3,\n    \"text\": \"Ответ от админа 2\"\n}"
 				},
 				"url": {
 					"raw": "{{HOST}}/api/messages/secure/admin/message",
@@ -919,7 +919,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{HOST}}/api/messages/search/findByUserEmail/?user_email=q@w.rt",
+					"raw": "{{HOST}}/api/messages/search/findByUserEmail/?userEmail=ad@min.ru&page=0&size=5",
 					"host": [
 						"{{HOST}}"
 					],
@@ -932,18 +932,220 @@
 					],
 					"query": [
 						{
-							"key": "user_email",
-							"value": "q@w.rt"
+							"key": "userEmail",
+							"value": "ad@min.ru"
 						},
 						{
 							"key": "page",
-							"value": "0",
-							"disabled": true
+							"value": "0"
 						},
 						{
 							"key": "size",
-							"value": "1",
-							"disabled": true
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "message get all",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/api/messages",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin append product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"Новый продукт 2\",\n    \"creator\":\"Создатель продукта\",\n    \"description\":\"Описание продукта\",\n    \"copies\": 5,\n    \"category\":\"category_1\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/admin/secure/append/product",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"secure",
+						"append",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin remove product",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/api/admin/secure/remove/product?productId=13",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"secure",
+						"remove",
+						"product"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "13"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin count inc",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/api/admin/secure/count/inc?productId=13",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"secure",
+						"count",
+						"inc"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "13"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin count dec",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST}}/api/admin/secure/count/dec?productId=13",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"admin",
+						"secure",
+						"count",
+						"dec"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "13"
 						}
 					]
 				}
@@ -979,7 +1181,7 @@
 		},
 		{
 			"key": "TOKEN",
-			"value": "eyJraWQiOiI3UjhvQXhjQ0k0aUVIQW9rWTZ3QlVNamhLb2tLaGJKTE5LRXl0MHdxZFMwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULnY4ejJ5ZGRzT0tOWmxnSWswLTJSM1VKaXFCalFHNGVKSkVES3d1elQ1b2ciLCJpc3MiOiJodHRwczovL2Rldi0xNDgxMDAwMi5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2OTM4NjQ3ODYsImV4cCI6MTY5Mzg2ODM4NiwiY2lkIjoiMG9hYjM1M2Y0a2pRdk5nUlM1ZDciLCJ1aWQiOiIwMHU5dG9pcDJ2c1FkM25wczVkNyIsInNjcCI6WyJvcGVuaWQiLCJlbWFpbCIsInByb2ZpbGUiXSwiYXV0aF90aW1lIjoxNjkzODY0Nzg1LCJzdWIiOiJhZEBtaW4ucnUiLCJyb2xlIjoiYWRtaW4ifQ.BqB8lL-51I2j2iOo9VE81wwYiUChy_TXvY9pD7gFiZm11jlMy2jHNDFhg-JPeGmYi4oexyfJWzdfFONXxzkAR5lRGJH-mBPtvOounxWQ0Y1eKkDU_wq0srVwQr5Qhote_Jx9-aLPOgXiEr1IVXFE4ud8bX6R2Sra-YNRuS8P_0Rz0qqD-4E2xPVhTZF2WN2mxgAhgzoyh58iycnzFL3stReAKPLgRQx-XCs40LwdO13zkxZGEdNba9fRPEgK8udA7qIagpuWBUgH8U8JL-Cw4s3BJ5EdT6X0njEUmzzEujZI308GfiaFES2RljxTJ07mswu67yUFblReb42UtDkd2w",
+			"value": "eyJraWQiOiI3UjhvQXhjQ0k0aUVIQW9rWTZ3QlVNamhLb2tLaGJKTE5LRXl0MHdxZFMwIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULjZndUg1dlhpRVVTT2RhdXp2NWJsQnNSaEVQRjlzc2l0LVJWbnE0c1lPMzQiLCJpc3MiOiJodHRwczovL2Rldi0xNDgxMDAwMi5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE2OTM5MTEwNzAsImV4cCI6MTY5MzkxNDY3MCwiY2lkIjoiMG9hYjM1M2Y0a2pRdk5nUlM1ZDciLCJ1aWQiOiIwMHViM3R5cmFpQnFCUDk5bjVkNyIsInNjcCI6WyJlbWFpbCIsIm9wZW5pZCIsInByb2ZpbGUiXSwiYXV0aF90aW1lIjoxNjkzOTExMDY4LCJzdWIiOiJuZXdfYWRtaW5Aa3NlcmdlaS50ZWNoIiwicm9sZSI6ImFkbWluIn0.IA3_CREb9o4tjLoEOOodNzThypEULitxMp7ceiNY5eBqHL_VohLkJCVr-6qYa-9PNn1hOUtmT579MDiu5nJNMjX0lYF6mxQiRpUHpWy75-s2bFncAsBPm51l3aYUTH-MrVF7tSg-1v9aWI6qGIWBUUlyUlxM3GvV7gm-L6sDRzrSn0wD9se-ZN0Bb4Us2rZlTZyI1YZBbuya3f5nEFD_J9-Ie4zF7PDUaBdFCv4Jwltv9UU1qnmlPgPmOd4uRYsV1QprGh659CFw_xOxWVhLJVjYemuHA2WLg8Wq09hOqw64dQG9Z6RYnczhOYQFAmQiAHR6joY7nRdZ5maetQBpBQ",
 			"type": "string"
 		}
 	]
