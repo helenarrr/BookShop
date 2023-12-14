@@ -10,12 +10,9 @@ function CallAction() {
 
                     <div className='col-4 col-md-4 container d-flex justify-content-center align-items-center'>
                         <div className='ml-2'>
-                            <h1>Текст 1</h1>
-                            <p className='lead'>
-                                Ещё текст 1
-                            </p>
+                            <h1>Без книги – в мире ночь, без книги мрак кругом. (В. Гюго)</h1>
                             <a type='button' className='btn main-color btn-lg text-white'
-                                href='/'>Тык 1</a>
+                                href='/search'>Перейти к поиску</a>
                         </div>
                     </div>
                 </div>
@@ -24,12 +21,9 @@ function CallAction() {
                     <div className='col-4 col-md-4 container d-flex 
                           justify-content-center align-items-center'>
                         <div className='ml-2'>
-                            <h1>Текст 2</h1>
-                            <p className='lead'>
-                                Ещё текст 2
-                            </p>
+                            <h1>В книге – память человеческого рода, она – рупор человеческой мысли. (В. Розанов)</h1>
                             <a type='button' className='btn main-color btn-lg text-white'
-                                href='/'>Тык 2</a>
+                                href='/search'>Перейти к поиску</a>
                         </div>
                     </div>
                     <div className='col-sm-6 col-md-6'>
@@ -44,23 +38,17 @@ function CallAction() {
                     <div className='m-2'>
                         <div className='col-image-left'>  </div>
                         <div className='mt-2'>
-                            <h1>Текст 1</h1>
-                            <p className='lead'>
-                                Ещё текст 1
-                            </p>
+                            <h1>Без книги – в мире ночь, без книги мрак кругом. (В. Гюго)</h1>
                             <a type='button' className='btn main-color btn-lg text-white'
-                                href='/'>Тык 1</a>
+                                href='/search'>Перейти к поиску</a>
                         </div>
 
                         <div className='mt-2'>
                             <div className='col-image-right'></div>
                             <div className='mt-2'>
-                                <h1>Текст 2</h1>
-                                <p className='lead'>
-                                    Ещё текст 2
-                                </p>
+                                <h1>В книге – память человеческого рода, она – рупор человеческой мысли. (В. Розанов)</h1>
                                 <a type='button' className='btn main-color btn-lg text-white'
-                                    href='/'>Тык 2</a>
+                                    href='/search'>Перейти к поиску</a>
                             </div>
                         </div>
 

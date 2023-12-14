@@ -126,10 +126,6 @@ function Carousel() {
                     <ReturnBookItem book={books[0]} key={books[0].id} />
                 </div>
             </div>
-
-            <div className="homepage-carousel-title mt-2">
-                <a className="btn btn-outline-secondary btn-lg" href="/">Подробности</a>
-            </div>
         </div>
     );
 }

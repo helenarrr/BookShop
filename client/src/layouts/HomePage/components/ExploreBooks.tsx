@@ -6,14 +6,7 @@ function ExploreBooks() {
             <div
                 className="container-fluid py-3 text-white d-flex justify-content-center align-items-center">
                 <div>
-                    <h1 className="display-5">Источник </h1>
-                    <p className="display-10">знаний</p>
-                    <a
-                        type="button"
-                        className="btn btn-primary main-color text-white" href="/"
-                    >
-                        Избранные книги
-                    </a>
+                    <h1 className="display-5">Книжный магазин</h1>
                 </div>
             </div>
         </div>
