@@ -11,6 +11,8 @@
  
 # Как установить и запустить проект
 
+<img width="1211" alt="image" src="https://github.com/helenarrr/BookShop/assets/88209065/a503bdbb-c310-47e6-9225-7453992d8148">
+
 ### Старт
 Чтобы запустить проект локально достаточно выполнить эти несложные инструкции.
 
@@ -21,22 +23,25 @@
 
 Библиотека для роутинга `npm i react-router-dom@5.0.0` -> `npm i --save-dev @types/react-router-dom`
 
-**Заполнить файл application.properties:** 
+**Заполнить файл application.properties:**
 
-**spring.datasource.url=jdbc:mysql**
-**spring.datasource.driver-class-name=**
-**spring.datasource.username**
-**spring.datasource.password=**
-**spring.jpa.properties.hibernate.dialect**
-**spring.data.rest.base-path=/api**
+**spring.datasource.url=jdbc:mysql**  
+**spring.datasource.driver-class-name=**  
+**spring.datasource.username**  
+**spring.datasource.password=**  
+**spring.jpa.properties.hibernate.dialect**  
+**spring.data.rest.base-path=/api**  
 
-**okta.oauth2.client-id**
-**okta.oauth2.issuer=https:**
+**okta.oauth2.client-id**  
+**okta.oauth2.issuer=https:**  
 
 Примеры заполнения есть на сайте https://www.geeksforgeeks.org/spring-boot-application-properties/
 
 ### Регистрация на сайте окта : https://developer.okta.com
 
+Необходимо получить client-id и issuer для файла application.properties и создать пользователя
+
+**Добавление Okta в React-проект**: 
 `npm install @okta/okta-react@6.4.3`
 `npm i @okta/okta-signin-widget@6.3.3`
 
@@ -49,19 +54,10 @@
 ## Использование
 
 У сайта есть два варианта использования. Учетка администратора и обычного пользователя.
-Можно зарегистрироваться под этими учетками и попробовать функции:
-
-**Обычный пользователь**
-Логин: qwGhe@gmail.com
-Пароль: 98*jkjHgbnJkjhB
-
-**Админ**
-Логин: userUserAdmin@mail.ru
-Пароль: 1dsgfjkUnfm8**9
 
 **Страница обычного юзера выглядит так** : 
 
-Есть возможность зайти/выйти, добавлять книги на полку, продлевать и возвращать товары, писать в тех поддержку.
+Есть возможность зайти/выйти, добавлять книги на полку, продлевать и возвращать товары, писать в тех. поддержку.
 
 <img width="1212" alt="image" src="https://github.com/helenarrr/BookShop/assets/88209065/e128df54-7596-4f49-95d4-ba3deccaffee">
 
@@ -71,6 +67,8 @@
 
 <img width="1210" alt="image" src="https://github.com/helenarrr/BookShop/assets/88209065/5c06440f-7c3a-42a0-b78a-8fdc58090989">
 
+## Дальнейшая поддержка
+Проект находится в стадии разработки, планируется добавление новых функций и улучшение текущих. Файл README.md также будет дорабатываться. Принимаются любые пожелания и замечания. Спасибо за уделенное время!
 
 ## Контакты
 Моя почта - elena.radchenko.9@mail.ru  
